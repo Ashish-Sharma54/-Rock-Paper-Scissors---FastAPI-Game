@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Play Game</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body class="{{ mode }}">
+    <div class="container small">
+        <h2>🧠 Mode: {{ mode.title() }}</h2>
+        <form method="post" action="/">
+            <div class="choices">
+                <button name="choice" value="rock">🪨 Rock</button>
+                <button name="choice" value="paper">📄 Paper</button>
+                <button name="choice" value="scissors">✂️ Scissors</button>
+            </div>
+            <input type="hidden" name="mode" value="{{ mode }}">
+        </form>
+
+        {% if result %}
+        <div class="result {{ result|lower }}">
+            <p>You chose: <span class="emoji">{{ user_emoji }}</span> <strong>{{ user }}</strong></p>
+            <p>Computer chose: <span class="emoji">{{ comp_emoji }}</span> <strong>{{ computer }}</strong></p>
+            <h3>{{ result }}!</h3>
+        </div>
+        {% endif %}
+
+        <div class="summary">
+            <p>Total Games: <strong>{{ total }}</strong></p>
+            <p>Wins: <strong>{{ wins }}</strong> | Losses: <strong>{{ losses }}</strong> | Ties: <strong>{{ ties }}</strong></p>
+            <form method="get" action="/reset">
+                <button class="reset">🔄 Reset</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
